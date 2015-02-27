@@ -55,7 +55,7 @@ $cep = ZipCode::find('01414-001');
 
 Type returns:
 ```PHP    
-$cep->toJon();
+$cep->toJson();
 
     {
         "cep": "01414-001",
