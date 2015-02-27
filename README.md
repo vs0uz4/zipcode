@@ -81,7 +81,8 @@ class WelcomeController extends Controller {
 ```
 
 
-Type returns:
+__Type returns:__
+
 ```PHP    
 $cep->toJson();
 
