@@ -72,10 +72,14 @@ public function index(ZipCodeContracts $zipcode)
 ```
 
 ##Traits
+__Add Namespace__
+```PHP
+use Artesaos\ZipCode\ZipCodeTrait;
+```
 ```PHP
 class WelcomeController extends Controller {
 
-	use \Artesaos\ZipCode\ZipCodeTrait;
+	use ZipCodeTrait;
 	
 	public function index()
 	{
