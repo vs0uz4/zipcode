@@ -29,7 +29,7 @@ In your `config/app.php` add `'Artesaos\ZipCode\Providers\ZipCodeServiceProvider
 ),
 ```
 
-At the end of `config/app.php` add `'ZipCode' => 'Artesaos\Cep\Facade\Cep'` to the `aliases` array:
+At the end of `config/app.php` add `'ZipCode' => 'Artesaos\ZipCode\Facade\ZipCode'` to the `aliases` array:
 
 ```PHP
 'aliases' => array(
