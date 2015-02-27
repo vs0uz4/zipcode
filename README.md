@@ -50,6 +50,7 @@ __Add namespace:__
 ```PHP
 use Artesaos\ZipCode\Facades\ZipCode;
 ```
+__Code Example__
 ```PHP
 $cep = ZipCode::find('01414-001');
 ```
@@ -65,6 +66,7 @@ __Add Namespace__
 ```PHP
 use Artesaos\ZipCode\ZipCodeContracts;
 ```
+__Code Example__
 ```PHP
 public function index(ZipCodeContracts $zipcode)
 {
@@ -76,6 +78,7 @@ __Add Namespace__
 ```PHP
 use Artesaos\ZipCode\ZipCodeTrait;
 ```
+__Code Example__
 ```PHP
 class WelcomeController extends Controller {
 
@@ -133,14 +136,15 @@ $cep->toObject();
         [complemento] => 
     )
 ```
-__Renew item from cache__
+
+##Renew item from cache
 
 ```PHP
 $cep   = ZipCode::find('01414001');			
 $dados = $cep->renew()->toArray();
 ```
 
-__To check if any errors had to do:__
+##To check if any errors had to do:
 
 ```PHP
 $cep   = ZipCode::find('01414001');			
