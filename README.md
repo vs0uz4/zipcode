@@ -73,7 +73,7 @@ public function index(\Artesaos\ZipCode\ZipCodeContracts $zipcode)
 ```PHP
 class WelcomeController extends Controller {
 
-	use \Canducci\ZipCode\ZipCodeTrait;
+	use \Artesaos\ZipCode\ZipCodeTrait;
 	
 	public function index()
 	{
