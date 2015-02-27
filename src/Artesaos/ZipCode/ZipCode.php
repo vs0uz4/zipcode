@@ -1,4 +1,4 @@
-<?php namespace Canducci\ZipCode;
+<?php namespace Artesaos\ZipCode;
 
 use Illuminate\Cache\CacheManager;
 
@@ -25,8 +25,8 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @param $value
-     * @return Canducci\ZipCode\ZipCode
-     * @throws Canducci\ZipCode\ZipCodeException
+     * @return Artesaos\ZipCode\ZipCode
+     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function find($value)
     {
@@ -44,7 +44,7 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @return JSON Javascript
-     * @throws Canducci\ZipCode\ZipCodeException
+     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function toJson()
     {
@@ -83,7 +83,7 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @return Array
-     * @throws Canducci\ZipCode\ZipCodeException
+     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function toArray()
     {
@@ -92,7 +92,7 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * @return stdClass
-     * @throws Canducci\ZipCode\ZipCodeException
+     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function toObject()
     {
@@ -101,7 +101,7 @@ class ZipCode implements ZipCodeContracts
 
     /**
      * Remove item from cache
-     * @return Canducci\ZipCode\ZipCode
+     * @return Artesaos\ZipCode\ZipCode
      */
     public function renew()
     {

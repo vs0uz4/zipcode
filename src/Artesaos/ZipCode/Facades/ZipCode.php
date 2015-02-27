@@ -1,4 +1,4 @@
-<?php namespace Canducci\ZipCode\Facades;
+<?php namespace Artesaos\ZipCode\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -6,6 +6,6 @@ class ZipCode extends Facade
 {
 	protected static function getFacadeAccessor()
 	{
-		return 'Canducci\ZipCode\ZipCode';
+		return 'Artesaos\ZipCode\ZipCode';
 	}
 }

@@ -1,9 +1,9 @@
 {
-  "name": "canducci/zipcodelaravel5",
+  "name": "artesaos/zipcode",
   "type": "library",
   "description": "A simple API ZipCode From Brazil",
-  "keywords": ["cep","zip","zipcode","cep from brazil","laravel5"],
-  "homepage": "https://github.com/diasfulvio/zipcodelaravelv5",
+  "keywords": ["cep","zip","zipcode","cep from brazil","laravel5", "Artesaos/zipcode"],
+  "homepage": "https://github.com/artesaos/zipcode",
   "license": "MIT",
   "authors": [
     {
@@ -20,10 +20,10 @@
   },
   "autoload": {
     "psr-4": {
-      "Canducci\\ZipCode\\": "src/Canducci/ZipCode/"
+      "Artesaos\\ZipCode\\": "src/Artesaos/ZipCode/"
     },
     "files":[
-      "src/Canducci/ZipCode/ZipCodeHelper.php"
+      "src/Artesaos/ZipCode/ZipCodeHelper.php"
     ]
   }
 }

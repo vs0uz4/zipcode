@@ -4,12 +4,12 @@
     {
         /**
          * @param $value
-         * @return Canducci\ZipCode\ZipCode
-         * @throws Canducci\ZipCode\ZipCodeException
+         * @return Artesaos\ZipCode\ZipCode
+         * @throws Artesaos\ZipCode\ZipCodeException
          */
         function zipcode($value)
         {
-            $zip_code = app('Canducci\ZipCode\ZipCodeContracts');
+            $zip_code = app('Artesaos\ZipCode\ZipCodeContracts');
             return $zip_code->find($value);
         }
 

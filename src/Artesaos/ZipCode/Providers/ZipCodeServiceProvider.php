@@ -1,6 +1,6 @@
-<?php namespace Canducci\ZipCode\Providers;
+<?php namespace Artesaos\ZipCode\Providers;
 
-use Canducci\ZipCode\ZipCode;
+use Artesaos\ZipCode\ZipCode;
 use Illuminate\Support\ServiceProvider;
 
 class ZipCodeServiceProvider extends ServiceProvider
@@ -8,7 +8,7 @@ class ZipCodeServiceProvider extends ServiceProvider
 
 	public function register()
 	{
-		$this->app->bind('Canducci\ZipCode\ZipCodeContracts',function($app){
+		$this->app->bind('Artesaos\ZipCode\ZipCodeContracts',function($app){
 			return new ZipCode($app['cache']);
 		});
 	}

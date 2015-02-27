@@ -1,11 +1,11 @@
-<?php namespace Canducci\ZipCode;
+<?php namespace Artesaos\ZipCode;
 
 trait ZipCodeTrait
 {
     /**
      * @param $value
-     * @return Canducci\ZipCode\ZipCode
-     * @throws Canducci\ZipCode\ZipCodeException
+     * @return Artesaos\ZipCode\ZipCode
+     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function zipcode($value)
     {

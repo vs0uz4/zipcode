@@ -1,4 +1,4 @@
-<?php namespace Canducci\ZipCode;
+<?php namespace Artesaos\ZipCode;
 
 class ZipCodeException extends \Exception
 {
