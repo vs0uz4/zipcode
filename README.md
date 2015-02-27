@@ -77,7 +77,7 @@ class WelcomeController extends Controller {
 	
 	public function index()
 	{
-      		$this->zipcode('01414000')->toArray()
+      		$cep =	$this->zipcode('01414000');
 ```
 
 
