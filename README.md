@@ -86,8 +86,9 @@ class WelcomeController extends Controller {
       		$cep =	$this->zipcode('01414000');
 ```
 
-__Type returns:__
+##Type returns:
 
+__Json__
 ```PHP    
 $cep->toJson();
 
@@ -101,7 +102,7 @@ $cep->toJson();
         "complemento": ""
     }
 ```
-
+__Array__
 ```PHP    
 $cep->toArray();
     
@@ -116,7 +117,7 @@ $cep->toArray();
         [complemento] => 
     )
 ```
-
+__Object__
 ```PHP    
 $cep->toObject();
     
