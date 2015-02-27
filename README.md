@@ -49,9 +49,37 @@ use Artesaos\ZipCode\Facades\ZipCode;
 
 To use is very simple, pass the ZIP and calls the various types of returns, like this:
 
+##Facade
+
 ```PHP
 $cep = ZipCode::find('01414-001');
 ```
+
+##Helper
+
+```PHP
+$cep = zipcode('01414000');
+```
+
+##Injection
+
+```PHP
+public function index(\Artesaos\ZipCode\ZipCodeContracts $zipcode)
+{
+      $cep = $zipcode->find('01414000');
+```
+
+##Trait
+```PHP
+class WelcomeController extends Controller {
+
+	use \Canducci\ZipCode\ZipCodeTrait;
+	
+	public function index()
+	{
+      		$this->zipcode('01414000')->toArray()
+```
+
 
 Type returns:
 ```PHP    
