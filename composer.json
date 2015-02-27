@@ -2,7 +2,7 @@
   "name": "artesaos/zipcode",
   "type": "library",
   "description": "A simple API ZipCode From Brazil",
-  "keywords": ["cep","zip","zipcode","cep from brazil","laravel5", "Artesaos/zipcode"],
+  "keywords": ["cep","zip","zipcode","cep from brazil","laravel5", "Artesaos"],
   "homepage": "https://github.com/artesaos/zipcode",
   "license": "MIT",
   "authors": [
