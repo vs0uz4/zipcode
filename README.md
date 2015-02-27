@@ -1,4 +1,4 @@
-# CANDUCCI ZIPCODE (CEP BRASIL)
+# ARTESÃOS ZIPCODE (CEP BRASIL)
 
 __Web Service provided by http://viacep.com.br/__
 
@@ -11,31 +11,31 @@ __Web Service provided by http://viacep.com.br/__
 In the `require` key of `composer.json` file add the following
 
 ```PHP
-"canducci/zipcodelaravel5": "dev-master"
+"artesaos/zipcode": "dev-master"
 ```
 
 Run the Composer update comand
 
     $ composer update
 
-In your `config/app.php` add `'Canducci\ZipCode\Providers\ZipCodeServiceProvider'` to the end of the `providers` array
+In your `config/app.php` add `'Artesaos\ZipCode\Providers\ZipCodeServiceProvider'` to the end of the `providers` array:
 
 ```PHP
 'providers' => array(
     ...,
     'Illuminate\Workbench\WorkbenchServiceProvider',
-    'Canducci\ZipCode\Providers\ZipCodeServiceProvider',
+    'Artesaos\ZipCode\Providers\ZipCodeServiceProvider',
 
 ),
 ```
 
-At the end of `config/app.php` add `'Cep' => 'Canducci\Cep\Facade\Cep'` to the `aliases` array
+At the end of `config/app.php` add `'ZipCode' => 'Artesaos\Cep\Facade\Cep'` to the `aliases` array:
 
 ```PHP
 'aliases' => array(
     ...,
     'View'       => 'Illuminate\Support\Facades\View',
-    'ZipCode'    => 'Canducci\ZipCode\Facades\ZipCode',
+    'ZipCode'    => 'Artesaos\ZipCode\Facades\ZipCode',
 
 ),
 ```
@@ -44,7 +44,7 @@ At the end of `config/app.php` add `'Cep' => 'Canducci\Cep\Facade\Cep'` to the `
 Add namespace:
 
 ```PHP
-use Canducci\ZipCode\Facades\ZipCode;
+use Artesaos\ZipCode\Facades\ZipCode;
 ```
 
 To use is very simple, pass the ZIP and calls the various types of returns, like this:
