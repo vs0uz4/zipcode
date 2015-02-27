@@ -41,16 +41,15 @@ At the end of `config/app.php` add `'ZipCode' => 'Artesaos\ZipCode\Facade\ZipCod
 ```
 
 ##How to Use
-Add namespace:
-
-```PHP
-use Artesaos\ZipCode\Facades\ZipCode;
-```
 
 To use is very simple, pass the ZIP and calls the various types of returns, like this:
 
 ##Facade
 
+__Add namespace:__
+```PHP
+use Artesaos\ZipCode\Facades\ZipCode;
+```
 ```PHP
 $cep = ZipCode::find('01414-001');
 ```
@@ -62,9 +61,12 @@ $cep = zipcode('01414000');
 ```
 
 ##Injection
-
+__Add Namespace__
 ```PHP
-public function index(\Artesaos\ZipCode\ZipCodeContracts $zipcode)
+use Artesaos\ZipCode\ZipCodeContracts;
+```
+```PHP
+public function index(ZipCodeContracts $zipcode)
 {
       $cep = $zipcode->find('01414000');
 ```
@@ -79,7 +81,6 @@ class WelcomeController extends Controller {
 	{
       		$cep =	$this->zipcode('01414000');
 ```
-
 
 __Type returns:__
 
