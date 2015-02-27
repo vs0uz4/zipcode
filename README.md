@@ -69,7 +69,7 @@ public function index(\Artesaos\ZipCode\ZipCodeContracts $zipcode)
       $cep = $zipcode->find('01414000');
 ```
 
-##Trait
+##Traits
 ```PHP
 class WelcomeController extends Controller {
 
