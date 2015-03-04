@@ -27,11 +27,15 @@ class ZipCodeTest extends TestCase
     {
         return $this->app->make('GuzzleHttp\ClientInterface');
     }
-
+    
+    public function getZipCodeInstance() 
+    {
+        return new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+    }
+    
     public function testInstance()
     {                
-        $this->assertInstanceOf('Artesaos\ZipCode\ZipCodeContracts',
-            new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient()));
+        $this->assertInstanceOf('Artesaos\ZipCode\ZipCodeContracts', $this->getZipCodeInstance());
 
     }
 
@@ -56,39 +60,39 @@ class ZipCodeTest extends TestCase
 
     public function testZipCodeNull()
     {
-        $zipCode = new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        $zipCode = $this->getZipCodeInstance();
         $this->assertTrue(is_null($zipCode->find('00000000')->toObject()));
     }
 
     public function testZipCodeNotNull()
     {
-        $zipCode = new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        $zipCode = $this->getZipCodeInstance();
         $this->assertFalse(is_null($zipCode->find('01414000')->toObject()));
     }
 
     public function testZipCodeReturnJSON()
     {
-        $zipCode = new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        $zipCode = $this->getZipCodeInstance();
         $this->assertJson($zipCode->find('01414000')->toJson());
 
     }
 
     public function testZipCodeKeyOfArray()
     {
-        $zipCode = new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        $zipCode = $this->getZipCodeInstance();
         $this->assertArrayHasKey('cep', $zipCode->find('01414000')->toArray());
     }
 
     public function testZipCodeException()
     {
-        $zipCode = new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        $zipCode = $this->getZipCodeInstance();
         $this->setExpectedException('Artesaos\ZipCode\ZipCodeException','Invalid Zip');
         $zipCode->find('');
     }
 
     public function testZipCodeNoFind()
     {
-        $zipCode = new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        $zipCode = $this->getZipCodeInstance();
         $this->assertTrue(is_null($zipCode->find('11111111')->toObject()));
     }
 }
