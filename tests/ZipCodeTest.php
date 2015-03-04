@@ -2,9 +2,6 @@
 
 $dir1 = str_replace('tests','src/Artesaos/ZipCode/ZipCodeTrait.php', __DIR__);
 $dir2 = str_replace('tests','src/Artesaos/ZipCode/ZipCodeException.php', __DIR__);
-//$dir3 = str_replace('artesaos\zipcode\tests','guzzlehttp/guzzle/src/Client.php', __DIR__);
-//$dir4 = str_replace('artesaos\zipcode\tests','guzzlehttp/guzzle/src/ClientInterface.php', __DIR__);
-
 
 include $dir1;
 include $dir2;
@@ -75,6 +72,12 @@ class ZipCodeTest extends TestCase
         $zipCode = $this->getZipCodeInstance();
         $this->assertJson($zipCode->find('01414000')->toJson());
 
+    }
+
+    public function testZipCodeReturnArray()
+    {
+        $zipCode = $this->getZipCodeInstance();
+        $this->assertInternalType('array', $zipCode->find('01414000')->toArray());
     }
 
     public function testZipCodeKeyOfArray()
