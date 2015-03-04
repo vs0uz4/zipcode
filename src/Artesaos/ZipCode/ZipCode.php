@@ -1,9 +1,10 @@
 <?php namespace Artesaos\ZipCode;
 
 use Illuminate\Cache\CacheManager;
+use GuzzleHttp\ClientInterface;
 
-class ZipCode implements ZipCodeContracts
-{
+class ZipCode implements ZipCodeContracts {
+    
     /**
      * @var $value
      */
@@ -15,15 +16,25 @@ class ZipCode implements ZipCodeContracts
     private $cacheManager;
 
     /**
+     * @var GuzzleHttp\ClientInterface
+     */
+    private $clientInterface;
+
+    /**
+     * Construct
+     *
      * @param Illuminate\Cache\CacheManager $cacheManager
      */
-    public function __construct(CacheManager $cacheManager)
+    public function __construct(CacheManager $cacheManager, ClientInterface $clientInterface)
     {
-        $this->value = '';
-        $this->cacheManager = $cacheManager;
+        $this->value           = '';
+        $this->cacheManager    = $cacheManager;        
+        $this->clientInterface = $clientInterface;
     }
 
     /**
+     * find method fluent
+     *
      * @param $value
      * @return Artesaos\ZipCode\ZipCode
      * @throws Artesaos\ZipCode\ZipCodeException
@@ -43,16 +54,22 @@ class ZipCode implements ZipCodeContracts
     }
 
     /**
+     * return JSON Javascript 
+     * 
      * @return JSON Javascript
      * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function toJson()
     {
         if ($this->cacheManager->has('zipcode_'.$this->value))
-        {
-            $getCache = $this->cacheManager->get('zipcode_'.$this->value);
-            if (is_array($getCache))
-            {
+        {            
+            $getCache = $this->cacheManager->get('zipcode_'.$this->value);            
+            if (isset($getCache) && is_array($getCache))
+            {   
+                if (isset($getCache['erro']) && $getCache['erro'] == true)
+                {
+                    return null;
+                }
                 $getCache = json_encode($getCache, JSON_PRETTY_PRINT);
             }
             return $getCache;
@@ -63,15 +80,15 @@ class ZipCode implements ZipCodeContracts
             $url   = str_replace('[cep]', $this->value, $url);
             $error = null;
             try
-            {
-                $get   = file_get_contents($url);
-                $error = json_decode($get);
-                if (isset($error->erro) && $error->erro === true)
+            {                
+                $response = $this->clientInterface->get($url);
+                $get      = $response->json();                                               
+                $this->cacheManager->put('zipcode_' . $this->value, $get, 86400);                
+                if (isset($get['erro']) && $get['erro'] == true)
                 {
                     return null;
-                }
-                $this->cacheManager->put('zipcode_' . $this->value, json_decode($get, true), 86400);
-                return $get;
+                }                
+                return json_encode($get);
             }
             catch (ZipCodeException $e)
             {
@@ -82,6 +99,8 @@ class ZipCode implements ZipCodeContracts
     }
 
     /**
+     * return Array
+     *
      * @return Array
      * @throws Artesaos\ZipCode\ZipCodeException
      */
@@ -91,6 +110,8 @@ class ZipCode implements ZipCodeContracts
     }
 
     /**
+     * return stdClass (Object)
+     *
      * @return stdClass
      * @throws Artesaos\ZipCode\ZipCodeException
      */
@@ -100,7 +121,8 @@ class ZipCode implements ZipCodeContracts
     }
 
     /**
-     * Remove item from cache
+     * remove item from cache
+     *
      * @return Artesaos\ZipCode\ZipCode
      */
     public function renew()

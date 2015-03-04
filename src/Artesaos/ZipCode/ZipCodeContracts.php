@@ -1,7 +1,7 @@
 <?php namespace Artesaos\ZipCode;
 
-interface ZipCodeContracts
-{
+interface ZipCodeContracts {
+    
     /**
      * @param $value
      * @return Artesaos\ZipCode\ZipCode
