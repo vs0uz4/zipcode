@@ -1,7 +1,6 @@
 <?php namespace Artesaos\ZipCode;
 
-trait ZipCodeTrait
-{
+trait ZipCodeTrait {
     /**
      * @param $value
      * @return Artesaos\ZipCode\ZipCode
