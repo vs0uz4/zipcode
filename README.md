@@ -102,7 +102,8 @@ The return can be null or class instance ZipCodeInfo (`Artesaos\ZipCode\ZipCodeI
 
 __Methods ZipCodeInfo__:
 
-__Json => getJson()__
+- Json => `getJson()`
+
 ```PHP 
 if ($zipCodeInfo) 
 {
@@ -119,7 +120,9 @@ if ($zipCodeInfo)
     }
 }
 ```
-__Array => getArray()__
+
+- Array => `getArray()`
+
 ```PHP   
 if ($zipCodeInfo) 
 {
@@ -137,7 +140,9 @@ if ($zipCodeInfo)
     )
 }
 ```
-**Object => getObject()**
+
+- Object => `getObject()`
+
 ```PHP    
 if ($zipCodeInfo) 
 {
