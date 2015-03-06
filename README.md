@@ -97,11 +97,12 @@ $zipCodeInfo = zipcode('01414000', false); // Helper
 $zipCodeInfo = $this->zipcode('01414000', true); //Traist
 ```
 __Return__
+
 The return can be null or class instance ZipCodeInfo (`Artesaos\ZipCode\ZipCodeInfo`) 
 
-__Methods__:
+__Methods ZipCodeInfo__:
 
-__Json__
+__Json => getJson()__
 ```PHP 
 if ($zipCodeInfo) 
 {
@@ -118,7 +119,7 @@ if ($zipCodeInfo)
     }
 }
 ```
-__Array__
+__Array => getArray()__
 ```PHP   
 if ($zipCodeInfo) 
 {
@@ -136,7 +137,7 @@ if ($zipCodeInfo)
     )
 }
 ```
-__Object__
+__Object => getObject()__
 ```PHP    
 if ($zipCodeInfo) 
 {
