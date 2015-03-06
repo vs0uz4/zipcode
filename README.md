@@ -137,7 +137,7 @@ if ($zipCodeInfo)
     )
 }
 ```
-__Object => getObject()__
+**Object => getObject()**
 ```PHP    
 if ($zipCodeInfo) 
 {
