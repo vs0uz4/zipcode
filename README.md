@@ -68,7 +68,7 @@ use Artesaos\ZipCode\Contracts\ZipCodeContract;
 ```
 __Code Example__
 ```PHP
-public function index(ZipCodeContracts $zipcode)
+public function index(ZipCodeContract $zipcode)
 {
       $zipCodeInfo = $zipcode->find('01414000');
 ```
