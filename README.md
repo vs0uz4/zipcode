@@ -52,19 +52,19 @@ use Artesaos\ZipCode\Facades\ZipCode;
 ```
 __Code Example__
 ```PHP
-$cep = ZipCode::find('01414-001');
+$zipCodeInfo = ZipCode::find('01414-001');
 ```
 
 ##Helper
 
 ```PHP
-$cep = zipcode('01414000');
+$zipCodeInfo = zipcode('01414000');
 ```
 
 ##Injection
 __Add Namespace__
 ```PHP
-use Artesaos\ZipCode\ZipCodeContracts;
+use Artesaos\ZipCode\Contracts\ZipCodeContract;
 ```
 __Code Example__
 ```PHP
@@ -86,15 +86,16 @@ class WelcomeController extends Controller {
 	
 	public function index()
 	{
-      		$cep =	$this->zipcode('01414000');
+      		$zipCodeInfo =	$this->zipcode('01414000');
 ```
 
 ##Type returns:
 
 __Json__
-```PHP    
-$cep->toJson();
-
+```PHP 
+if ($zipCodeInfo) 
+{
+   $cep->getJson();
     {
         "cep": "01414-001",
         "logradouro": "Rua Haddock Lobo",
@@ -104,11 +105,13 @@ $cep->toJson();
         "ibge": "3550308", 
         "complemento": ""
     }
+}
 ```
 __Array__
-```PHP    
-$cep->toArray();
-    
+```PHP   
+if ($zipCodeInfo) 
+{
+   $cep->getArray();
     Array
     (
         [cep] => 01414-001
@@ -119,12 +122,13 @@ $cep->toArray();
         [ibge] => 3550308,
         [complemento] => 
     )
+}
 ```
 __Object__
 ```PHP    
-$cep->toObject();
-    
-    
+if ($zipCodeInfo) 
+{
+   $cep->getObject();
     stdClass Object
     (
         [cep] => 01414-001
@@ -135,24 +139,25 @@ $cep->toObject();
         [ibge] => 3550308
         [complemento] => 
     )
+}
 ```
 
 ##Renew item from cache
 
 ```PHP
-$cep   = ZipCode::find('01414001');			
-$dados = $cep->renew()->toArray();
-```
-
-##To check if any errors had to do:
-
-```PHP
-$cep   = ZipCode::find('01414001');			
-$dados = $cep->toArray();
-
-if ($dados) {
-	//ZIP EXISTING
-} else {
-	//POSTAL CODE NO EXISTING 
+$zipCodeInfo  = ZipCode::find('01414001', true);			
+if ($zipCodeInfo) 
+{
+   $zipCodeInfo->getObject();
+    stdClass Object
+    (
+        [cep] => 01414-001
+        [logradouro] => Rua Haddock Lobo
+        [bairro] => Cerqueira César
+        [localidade] => São Paulo
+        [uf] => SP
+        [ibge] => 3550308
+        [complemento] => 
+    )
 }
 ```
