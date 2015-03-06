@@ -102,7 +102,7 @@ The return can be null or class instance ZipCodeInfo (`Artesaos\ZipCode\ZipCodeI
 
 __Methods ZipCodeInfo__:
 
-- Json => `getJson()`
+- _Json => `getJson()`_ 
 
 ```PHP 
 if ($zipCodeInfo) 
