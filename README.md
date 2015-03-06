@@ -121,7 +121,7 @@ if ($zipCodeInfo)
 }
 ```
 
-- Array => `getArray()`
+- _Array => `getArray()`_
 
 ```PHP   
 if ($zipCodeInfo) 
@@ -141,7 +141,7 @@ if ($zipCodeInfo)
 }
 ```
 
-- Object => `getObject()`
+- _Object => `getObject()`_ 
 
 ```PHP    
 if ($zipCodeInfo) 
