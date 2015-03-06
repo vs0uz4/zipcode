@@ -4,7 +4,7 @@ use Illuminate\Cache\CacheManager;
 use GuzzleHttp\ClientInterface;
 use Artesaos\ZipCode\Contracts\ZipCodeContract;
 
-final class ZipCode implements ZipCodeContract {
+class ZipCode implements ZipCodeContract {
     
     /**
      * @var $value

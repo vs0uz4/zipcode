@@ -1,6 +1,6 @@
 <?php namespace Artesaos\ZipCode;
 
-final class ZipCodeException extends \Exception {
+class ZipCodeException extends \Exception {
 
 	/**
 	 * Construct ZipCodeException
