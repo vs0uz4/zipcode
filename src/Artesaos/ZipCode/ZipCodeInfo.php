@@ -12,14 +12,14 @@ final class ZipCodeInfo implements ZipCodeInfoContract {
 	/**
 	 * Construct ZipCodeInfo	 
 	 */
-	public function __construct($valueJson) 
-	{
+    public function __construct($valueJson) 
+    {
         $this->valueJson = $valueJson;
         if ($this->json_validate_zipcode() === false) 
         {
-			throw new ZipCodeException("Invalid JSON ZipCode");            
+	    	throw new ZipCodeException("Invalid JSON ZipCode");            
         } 
-	}
+    }
 
 	/**
      * return JSON javascript
