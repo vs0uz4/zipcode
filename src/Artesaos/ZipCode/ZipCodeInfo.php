@@ -9,9 +9,12 @@ class ZipCodeInfo implements ZipCodeInfoContract {
 	 */
 	private $valueJson = null;
 
-	/**
-	 * Construct ZipCodeInfo	 
-	 */
+    /**
+     * Construct ZipCodeInfo
+     *
+     * @param string $valueJson
+     * @throws ZipCodeException
+     */
     public function __construct($valueJson) 
     {
         if (is_string($valueJson))
