@@ -70,7 +70,7 @@ __Code Example__
 ```PHP
 public function index(ZipCodeContracts $zipcode)
 {
-      $cep = $zipcode->find('01414000');
+      $zipCodeInfo = $zipcode->find('01414000');
 ```
 
 ##Traits
@@ -95,7 +95,8 @@ __Json__
 ```PHP 
 if ($zipCodeInfo) 
 {
-   $cep->getJson();
+    $zipCodeInfo->getJson();
+    
     {
         "cep": "01414-001",
         "logradouro": "Rua Haddock Lobo",
@@ -111,7 +112,8 @@ __Array__
 ```PHP   
 if ($zipCodeInfo) 
 {
-   $cep->getArray();
+    $zipCodeInfo->getArray();
+    
     Array
     (
         [cep] => 01414-001
@@ -128,7 +130,8 @@ __Object__
 ```PHP    
 if ($zipCodeInfo) 
 {
-   $cep->getObject();
+    $zipCodeInfo->getObject();
+    
     stdClass Object
     (
         [cep] => 01414-001
@@ -148,7 +151,8 @@ if ($zipCodeInfo)
 $zipCodeInfo  = ZipCode::find('01414001', true);			
 if ($zipCodeInfo) 
 {
-   $zipCodeInfo->getObject();
+    $zipCodeInfo->getObject();
+   
     stdClass Object
     (
         [cep] => 01414-001
