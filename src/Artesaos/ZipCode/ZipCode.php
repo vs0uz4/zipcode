@@ -7,12 +7,12 @@ use Artesaos\ZipCode\Contracts\ZipCodeContract;
 final class ZipCode implements ZipCodeContract {
     
     /**
-     * @var $value (string)
+     * @var $value
      */
     protected $value;
 
     /**
-     * @var $renew (bool)
+     * @var $renew
      */
     protected $renew;
 
@@ -43,10 +43,10 @@ final class ZipCode implements ZipCodeContract {
     /**
      * return ZipCodeInfo
      *
-     * @param $value (string)
-     * @param $renew (bool)
+     * @param string $value
+     * @param bool $renew
      * @return Artesaos\ZipCode\ZipCodeInfo
-     * @throws Artesaos\ZipCode\ZipCodeException
+     * @throws ZipCodeException
      */
     public function find($value, $renew = false)
     {
@@ -65,13 +65,14 @@ final class ZipCode implements ZipCodeContract {
                 return new ZipCodeInfo($valueInfo);
             }
         }
-        throw new ZipCodeException("Invalid Zip");
+        throw new ZipCodeException("Invalid Zip. The format valid: 01001-000 or 01001000");
     }
 
     /**
-     * return JSON javascript 
+     * return JSON javascript
      *
      * @return JSON javascript
+     * @throws ZipCodeException
      */
     private function getZipCodeInfo()
     {

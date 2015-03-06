@@ -31,7 +31,17 @@ class ZipCodeTest extends TestCase
      */
     public function getZipCodeInstance() 
     {
-        return new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()), $this->getGuzzleHttpClient());
+        return new Artesaos\ZipCode\ZipCode(new Illuminate\Cache\CacheManager(app()),
+            $this->getGuzzleHttpClient());
+    }
+
+    /**
+     *
+     */
+    public function getZipCodeInfoInstance()
+    {
+        $zipCode = $this->getZipCodeInstance();
+        return $zipCode->find('01414000');
     }
 
     /**
@@ -39,7 +49,8 @@ class ZipCodeTest extends TestCase
      */
     public function testInstance()
     {                
-        $this->assertInstanceOf('Artesaos\ZipCode\Contracts\ZipCodeContract', $this->getZipCodeInstance());
+        $this->assertInstanceOf('Artesaos\ZipCode\Contracts\ZipCodeContract',
+            $this->getZipCodeInstance());
 
     }
 
@@ -59,7 +70,8 @@ class ZipCodeTest extends TestCase
      */
     public function testHelperToZipCodeInfoInstance()
     {
-        $this->assertInstanceOf('Artesaos\ZipCode\Contracts\ZipCodeInfoContract', zipcode('01414000'));
+        $this->assertInstanceOf('Artesaos\ZipCode\Contracts\ZipCodeInfoContract',
+            zipcode('01414000'));
     }
 
     /**
@@ -67,7 +79,8 @@ class ZipCodeTest extends TestCase
      */
     public function testTraitToZipCodeInfoInstance()
     {
-        $this->assertInstanceOf('Artesaos\ZipCode\Contracts\ZipCodeInfoContract', $this->zipcode('01414000'));
+        $this->assertInstanceOf('Artesaos\ZipCode\Contracts\ZipCodeInfoContract',
+            $this->zipcode('01414000'));
     }
 
     /**
@@ -93,8 +106,7 @@ class ZipCodeTest extends TestCase
      */
     public function testZipCodeInfoReturnJSON()
     {
-        $zipCode     = $this->getZipCodeInstance();
-        $zipCodeInfo = $zipCode->find('01414000');
+        $zipCodeInfo = $this->getZipCodeInfoInstance();
         $this->assertJson($zipCodeInfo->getJson());
 
     }
@@ -104,9 +116,9 @@ class ZipCodeTest extends TestCase
      */
     public function testZipCodeInfoReturnArray()
     {
-        $zipCode     = $this->getZipCodeInstance();
-        $zipCodeInfo = $zipCode->find('01414000');
-        $this->assertInternalType('array', $zipCodeInfo->getArray());
+        $zipCodeInfo = $this->getZipCodeInfoInstance();
+        $this->assertInternalType('array',
+            $zipCodeInfo->getArray());
     }
 
     /**
@@ -114,9 +126,9 @@ class ZipCodeTest extends TestCase
      */
     public function testZipCodeInfoKeyOfArray()
     {
-        $zipCode = $this->getZipCodeInstance();
-        $zipCodeInfo = $zipCode->find('01414000');
-        $this->assertArrayHasKey('cep', $zipCodeInfo->getArray());
+        $zipCodeInfo = $this->getZipCodeInfoInstance();
+        $this->assertArrayHasKey('cep',
+            $zipCodeInfo->getArray());
     }
 
     /**
@@ -125,7 +137,8 @@ class ZipCodeTest extends TestCase
     public function testZipCodeException()
     {
         $zipCode = $this->getZipCodeInstance();
-        $this->setExpectedException('Artesaos\ZipCode\ZipCodeException','Invalid Zip');
+        $this->setExpectedException('Artesaos\ZipCode\ZipCodeException',
+            'Invalid Zip. The format valid: 01001-000 or 01001000');
         $zipCode->find('');
     }
 

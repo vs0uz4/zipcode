@@ -5,8 +5,8 @@ trait ZipCodeTrait {
     /**
      * Traits ZipCode
      *
-     * @param $value (string)
-     * @param $renew (bool)
+     * @param string $value
+     * @param bool $renew
      * @return Artesaos\ZipCode\ZipCodeInfo
      * @throws Artesaos\ZipCode\ZipCodeException
      */

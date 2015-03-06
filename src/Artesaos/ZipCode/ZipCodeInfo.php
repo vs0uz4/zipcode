@@ -5,7 +5,7 @@ use Artesaos\ZipCode\Contracts\ZipCodeInfoContract;
 final class ZipCodeInfo implements ZipCodeInfoContract {
 	
 	/**	 
-	 * @var $valueJson (JSON Javascript)
+	 * @var string $valueJson
 	 */
 	private $valueJson = null;
 
@@ -14,11 +14,17 @@ final class ZipCodeInfo implements ZipCodeInfoContract {
 	 */
     public function __construct($valueJson) 
     {
-        $this->valueJson = $valueJson;
-        if ($this->json_validate_zipcode() === false) 
+        if (is_string($valueJson))
         {
-	    	throw new ZipCodeException("Invalid JSON ZipCode");            
-        } 
+            $this->valueJson = $valueJson;
+            if ($this->json_validate_zipcode() === false) {
+                throw new ZipCodeException("Invalid JSON ZipCode");
+            }
+        }
+        else
+        {
+            throw new ZipCodeException("Invalid Format to Type string");
+        }
     }
 
 	/**
@@ -30,7 +36,7 @@ final class ZipCodeInfo implements ZipCodeInfoContract {
     public function getJson()
     {
         if (!is_null($this->valueJson))
-    	{
+        {
             return $this->valueJson;    
         }
         return null;        

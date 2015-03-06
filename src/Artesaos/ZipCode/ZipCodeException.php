@@ -5,9 +5,9 @@ final class ZipCodeException extends \Exception {
 	/**
 	 * Construct ZipCodeException
 	 *	 
-	 * @param $message (string)
-	 * @param $code (int)
-	 * @param $previous (\Exception)
+	 * @param string $message
+	 * @param int $code
+	 * @param \Exception $previous
 	 */
     public function __construct($message = "", $code = 0, \Exception $previous = null)
     {
