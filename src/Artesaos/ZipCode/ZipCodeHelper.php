@@ -2,15 +2,18 @@
 
     if (!function_exists('zipcode'))
     {
-        /**
-         * @param $value
-         * @return Artesaos\ZipCode\ZipCode
+        /**         
+         * Helper zipcode
+         *
+         * @param $value (string)
+         * @param @renew (bool)
+         * @return Artesaos\ZipCode\ZipCodeInfo
          * @throws Artesaos\ZipCode\ZipCodeException
          */
-        function zipcode($value)
+        function zipcode($value, $renew = false)
         {
-            $zip_code = app('Artesaos\ZipCode\ZipCodeContracts');
-            return $zip_code->find($value);
+            $zip_code = app('Artesaos\ZipCode\Contracts\ZipCodeContract');
+            return $zip_code->find($value, $renew);
         }
 
     }

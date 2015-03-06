@@ -1,13 +1,17 @@
 <?php namespace Artesaos\ZipCode;
 
 trait ZipCodeTrait {
+
     /**
-     * @param $value
-     * @return Artesaos\ZipCode\ZipCode
+     * Traits ZipCode
+     *
+     * @param $value (string)
+     * @param $renew (bool)
+     * @return Artesaos\ZipCode\ZipCodeInfo
      * @throws Artesaos\ZipCode\ZipCodeException
      */
-    public function zipcode($value)
+    public function zipcode($value, $renew = false)
     {
-        return zipcode($value);
+        return zipcode($value, $renew);
     }
 }

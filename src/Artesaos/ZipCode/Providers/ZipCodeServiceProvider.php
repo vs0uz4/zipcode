@@ -5,6 +5,12 @@ use Illuminate\Support\ServiceProvider;
 
 class ZipCodeServiceProvider extends ServiceProvider {
 
+	/**
+     * Register ServiceProvider GuzzleHttp\Client
+     * Register ServiceProvider Artesaos\ZipCode\ZipCode
+     *
+     * @return void
+     */
 	public function register()
 	{
 					
@@ -13,7 +19,7 @@ class ZipCodeServiceProvider extends ServiceProvider {
 			$this->app->bind('GuzzleHttp\ClientInterface', 'GuzzleHttp\Client');
 		}
 
-		$this->app->bind('Artesaos\ZipCode\ZipCodeContracts', function($app)
+		$this->app->bind('Artesaos\ZipCode\Contracts\ZipCodeContract', function($app)
 		{			
 			return new ZipCode($app['cache'], $app['GuzzleHttp\ClientInterface']);
 		});

@@ -2,44 +2,53 @@
 
 use Illuminate\Cache\CacheManager;
 use GuzzleHttp\ClientInterface;
+use Artesaos\ZipCode\Contracts\ZipCodeContract;
 
-class ZipCode implements ZipCodeContracts {
+final class ZipCode implements ZipCodeContract {
     
     /**
-     * @var $value
+     * @var $value (string)
      */
-    private $value;
+    protected $value;
 
     /**
-     * @var Illuminate\Cache\CacheManager
+     * @var $renew (bool)
      */
-    private $cacheManager;
+    protected $renew;
 
     /**
-     * @var GuzzleHttp\ClientInterface
+     * @var $cacheManager (Illuminate\Cache\CacheManager)
      */
-    private $clientInterface;
+    protected $cacheManager;
 
     /**
-     * Construct
+     * @var $clientInterface (GuzzleHttp\ClientInterface)
+     */
+    protected $clientInterface;
+
+    /**
+     * Construct ZipCode
      *
-     * @param Illuminate\Cache\CacheManager $cacheManager
+     * @param $cacheManager (Illuminate\Cache\CacheManager)
+     * @param $clientInterface (GuzzleHttp\ClientInterface)
      */
     public function __construct(CacheManager $cacheManager, ClientInterface $clientInterface)
-    {
+    {        
         $this->value           = '';
+        $this->renew           = false;
         $this->cacheManager    = $cacheManager;        
         $this->clientInterface = $clientInterface;
     }
 
     /**
-     * find method fluent
+     * return ZipCodeInfo
      *
-     * @param $value
-     * @return Artesaos\ZipCode\ZipCode
+     * @param $value (string)
+     * @param $renew (bool)
+     * @return Artesaos\ZipCode\ZipCodeInfo
      * @throws Artesaos\ZipCode\ZipCodeException
      */
-    public function find($value)
+    public function find($value, $renew = false)
     {
         if (is_string($value))
         {
@@ -47,20 +56,30 @@ class ZipCode implements ZipCodeContracts {
             $value = str_replace('-', '', $value);
             if (mb_strlen($value) === 8 && preg_match('/^(\d){8}$/', $value)) {
                 $this->value = $value;
-                return $this;
+                $this->renew = $renew;
+                $valueInfo   = $this->getZipCodeInfo();
+                if ($valueInfo === null) 
+                {
+                    return null;
+                }
+                return new ZipCodeInfo($valueInfo);
             }
         }
         throw new ZipCodeException("Invalid Zip");
     }
 
     /**
-     * return JSON Javascript 
-     * 
-     * @return JSON Javascript
-     * @throws Artesaos\ZipCode\ZipCodeException
+     * return JSON javascript 
+     *
+     * @return JSON javascript
      */
-    public function toJson()
+    private function getZipCodeInfo()
     {
+        if ($this->renew)
+        {
+            $this->renew = false;
+            $this->renew();
+        }
         if ($this->cacheManager->has('zipcode_'.$this->value))
         {            
             $getCache = $this->cacheManager->get('zipcode_'.$this->value);            
@@ -71,7 +90,7 @@ class ZipCode implements ZipCodeContracts {
                     return null;
                 }
                 $getCache = json_encode($getCache, JSON_PRETTY_PRINT);
-            }
+            }            
             return $getCache;
         }
         else
@@ -96,44 +115,21 @@ class ZipCode implements ZipCodeContracts {
             }
         }
         return null;
-    }
-
-    /**
-     * return Array
-     *
-     * @return Array
-     * @throws Artesaos\ZipCode\ZipCodeException
-     */
-    public function toArray()
-    {
-        return json_decode($this->toJson(), true);
-    }
-
-    /**
-     * return stdClass (Object)
-     *
-     * @return stdClass
-     * @throws Artesaos\ZipCode\ZipCodeException
-     */
-    public function toObject()
-    {
-        return json_decode($this->toJson(), false);
-    }
+    }    
 
     /**
      * remove item from cache
      *
-     * @return Artesaos\ZipCode\ZipCode
+     * @return void
      */
-    public function renew()
-    {
-        if ($this->value != '')
-        {
+    private function renew()
+    {   
+        if (!is_null($this->value)) 
+        {           
             if ($this->cacheManager->has('zipcode_' . $this->value))
             {
                 $this->cacheManager->forget('zipcode_' . $this->value);
-            }
-        }
-        return $this;
+            }           
+        }        
     }
 }
