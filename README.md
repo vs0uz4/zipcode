@@ -88,8 +88,18 @@ class WelcomeController extends Controller {
 	{
       		$zipCodeInfo =	$this->zipcode('01414000');
 ```
+## Summary of How to Use
+__Code__
+```PHP 
+$zipCodeInfo = ZipCode::find('01414000', false); //Facade
+$zipCodeInfo = $zipcode->find('01414000', false); //Contracts
+$zipCodeInfo = zipcode('01414000', false); // Helper
+$zipCodeInfo = $this->zipcode('01414000', true); //Traist
+```
+__Return__
+The return can be null or class instance ZipCodeInfo (`Artesaos\ZipCode\ZipCodeInfo`) 
 
-##Type returns:
+__Methods__:
 
 __Json__
 ```PHP 
