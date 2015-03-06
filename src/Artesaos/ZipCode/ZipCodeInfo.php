@@ -17,7 +17,7 @@ final class ZipCodeInfo implements ZipCodeInfoContract {
         $this->valueJson = $valueJson;
         if ($this->json_validate_zipcode() === false) 
         {
-		  throw new ZipCodeException("Invalid JSON ZipCode");            
+			throw new ZipCodeException("Invalid JSON ZipCode");            
         } 
 	}
 
