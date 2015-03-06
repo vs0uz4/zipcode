@@ -6,7 +6,6 @@ interface ZipCodeInfoContract {
      * return JSON Javascript 
      *
      * @return JSON Javascript
-     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function getJson();
 
@@ -14,7 +13,6 @@ interface ZipCodeInfoContract {
      * return Array
      *
      * @return Array
-     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function getArray();
 
@@ -22,7 +20,6 @@ interface ZipCodeInfoContract {
      * return stdClass (Object)
      *
      * @return \stdClass
-     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function getObject();   
     

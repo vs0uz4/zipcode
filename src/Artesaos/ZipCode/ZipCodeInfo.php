@@ -3,11 +3,12 @@
 use Artesaos\ZipCode\Contracts\ZipCodeInfoContract;
 
 class ZipCodeInfo implements ZipCodeInfoContract {
-	
-	/**	 
-	 * @var string $valueJson
-	 */
-	private $valueJson = null;
+
+
+    /**
+     * @var string $valueJson
+     */
+    private $valueJson = null;
 
     /**
      * Construct ZipCodeInfo
@@ -30,11 +31,11 @@ class ZipCodeInfo implements ZipCodeInfoContract {
         }
     }
 
-	/**
-     * return JSON javascript
+
+    /**
+     * return JSON Javascript
      *
-     * @return JSON javascript
-     * @throws Artesaos\ZipCode\ZipCodeException
+     * @return JSON Javascript
      */
     public function getJson()
     {
@@ -49,7 +50,6 @@ class ZipCodeInfo implements ZipCodeInfoContract {
      * return Array
      *
      * @return Array
-     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function getArray()
     {
@@ -64,7 +64,6 @@ class ZipCodeInfo implements ZipCodeInfoContract {
      * return stdClass (Object)
      *
      * @return \stdClass
-     * @throws Artesaos\ZipCode\ZipCodeException
      */
     public function getObject()
     {
