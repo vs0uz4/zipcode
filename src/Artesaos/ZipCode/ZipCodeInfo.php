@@ -4,7 +4,6 @@ use Artesaos\ZipCode\Contracts\ZipCodeInfoContract;
 
 class ZipCodeInfo implements ZipCodeInfoContract {
 
-
     /**
      * @var string $valueJson
      */

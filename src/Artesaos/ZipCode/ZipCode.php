@@ -9,22 +9,22 @@ class ZipCode implements ZipCodeContract {
     /**
      * @var $value
      */
-    protected $value;
+    private $value;
 
     /**
      * @var $renew
      */
-    protected $renew;
+    private $renew;
 
     /**
      * @var $cacheManager (Illuminate\Cache\CacheManager)
      */
-    protected $cacheManager;
+    private $cacheManager;
 
     /**
      * @var $clientInterface (GuzzleHttp\ClientInterface)
      */
-    protected $clientInterface;
+    private $clientInterface;
 
     /**
      * Construct ZipCode
@@ -50,37 +50,59 @@ class ZipCode implements ZipCodeContract {
      */
     public function find($value, $renew = false)
     {
+        $message = '';
         if (is_string($value))
         {
             $value = str_replace('.', '', $value);
             $value = str_replace('-', '', $value);
-            if (mb_strlen($value) === 8 && preg_match('/^(\d){8}$/', $value)) {
-                $this->value = $value;
-                $this->renew = $renew;
-                $valueInfo   = $this->getZipCodeInfo();
-                if ($valueInfo === null) 
-                {
-                    return null;
-                }
-                return new ZipCodeInfo($valueInfo);
+            if (mb_strlen($value) === 8 && preg_match('/^(\d){8}$/', $value)) 
+            {
+                $this->value = $value;                
+            } 
+            else 
+            {
+                $message = 'Invalid Zip. The format valid: 01001-000 or 01001000';
             }
+        } 
+        else
+        {
+            $message = 'Invalid Zip. The format valid: 01001-000 or 01001000';  
         }
-        throw new ZipCodeException("Invalid Zip. The format valid: 01001-000 or 01001000");
+
+        if (is_bool($renew))
+        {
+            $this->renew = $renew;
+        } 
+        else 
+        {
+            if ($message != '')
+            {
+                $message .= PHP_EOL;
+            }
+            $message .= 'Error in the second parameter should be true or false';
+        }
+        
+        if ($message === '')
+        {
+            $valueInfo   = $this->getZipCodeInfo();
+            if ($valueInfo === null) 
+            {
+                return null;
+            }
+            return new ZipCodeInfo($valueInfo);
+        }        
+        throw new ZipCodeException($message);
     }
 
     /**
-     * return JSON javascript
+     * return JSON Javascript
      *
-     * @return JSON javascript
+     * @return JSON Javascript
      * @throws ZipCodeException
      */
     private function getZipCodeInfo()
-    {
-        if ($this->renew)
-        {
-            $this->renew = false;
-            $this->renew();
-        }
+    {       
+        $this->renew();       
         if ($this->cacheManager->has('zipcode_'.$this->value))
         {            
             $getCache = $this->cacheManager->get('zipcode_'.$this->value);            
@@ -90,30 +112,22 @@ class ZipCode implements ZipCodeContract {
                 {
                     return null;
                 }
-                $getCache = json_encode($getCache, JSON_PRETTY_PRINT);
-            }            
-            return $getCache;
+                return json_encode($getCache, JSON_PRETTY_PRINT);
+            }
         }
         else
-        {
-            $url   = 'http://viacep.com.br/ws/[cep]/json/';
-            $url   = str_replace('[cep]', $this->value, $url);
-            $error = null;
-            try
-            {                
-                $response = $this->clientInterface->get($url);
-                $get      = $response->json();                                               
-                $this->cacheManager->put('zipcode_' . $this->value, $get, 86400);                
-                if (isset($get['erro']) && $get['erro'] == true)
+        {                                    
+            $response = $this->clientInterface->get($this->url());                
+            if ($response->getStatusCode() === 200)
+            {
+                $getResponse = $response->json();                                               
+                $this->cacheManager->put('zipcode_' . $this->value, $getResponse, 86400);                
+                if (isset($getResponse['erro']) && $getResponse['erro'] == true)
                 {
                     return null;
                 }                
-                return json_encode($get);
-            }
-            catch (ZipCodeException $e)
-            {
-                throw new ZipCodeException("Number and http are invalid", $e->getCode(), $e);
-            }
+                return json_encode($getResponse, JSON_PRETTY_PRINT);
+            }                       
         }
         return null;
     }    
@@ -125,12 +139,24 @@ class ZipCode implements ZipCodeContract {
      */
     private function renew()
     {   
-        if (!is_null($this->value)) 
+        if ($this->renew && (is_null($this->value) === false)) 
         {           
             if ($this->cacheManager->has('zipcode_' . $this->value))
             {
                 $this->cacheManager->forget('zipcode_' . $this->value);
             }           
-        }        
+            $this->renew = false;  
+        }              
     }
+
+    /**
+     * get url web service
+     *
+     * @return string
+     */
+    private function url() 
+    {
+        return str_replace('[cep]', $this->value, 'http://viacep.com.br/ws/[cep]/json/');
+    }
+
 }

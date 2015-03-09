@@ -1,14 +1,15 @@
 {
   "name": "artesaos/zipcode",
   "type": "library",
-  "description": "A simple API ZipCode From Brazil",
+  "description": "ZipCode From Brazil",
   "keywords": ["cep","zip","zipcode","cep from brazil","laravel5", "Artesaos"],
   "homepage": "https://github.com/artesaos/zipcode",
   "license": "MIT",
   "authors": [
     {
       "name": "Fúlvio Cezar Canducci Dias",
-      "email": "dias.fulvio@gmail.com"
+      "email": "dias.fulvio@gmail.com",
+      "role": "Developer"
     }
   ],
   "require": {

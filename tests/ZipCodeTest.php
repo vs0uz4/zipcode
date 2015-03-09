@@ -143,6 +143,17 @@ class ZipCodeTest extends TestCase
     }
 
     /**
+     * Tests thrown messages "Invalid Zip"
+     */
+    public function testZipCodeSecondParameterException()
+    {
+        $zipCode = $this->getZipCodeInstance();
+        $this->setExpectedException('Artesaos\ZipCode\ZipCodeException',
+            'Error in the second parameter should be true or false');
+        $zipCode->find('19200000', '');
+    }
+
+    /**
      * Tests no found
      */
     public function testZipCodeInfoNoFind()
