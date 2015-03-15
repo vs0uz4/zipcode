@@ -5,6 +5,13 @@ use Illuminate\Support\ServiceProvider;
 
 class ZipCodeServiceProvider extends ServiceProvider {
 
+    /**
+     *
+     */
+    public function boot(){
+        $this->loadTranslationsFrom(__DIR__.'/../../../lang', 'artesaos-zipcode');
+    }
+
 	/**
      * Register ServiceProvider GuzzleHttp\Client
      * Register ServiceProvider Artesaos\ZipCode\ZipCode
