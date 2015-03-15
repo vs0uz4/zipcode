@@ -21,12 +21,12 @@ class ZipCodeInfo implements ZipCodeInfoContract {
         {
             $this->valueJson = $valueJson;
             if ($this->json_validate_zipcode() === false) {
-                throw new ZipCodeException("Invalid JSON ZipCode");
+                throw new ZipCodeException( trans('artesaos-zipcode::zipcode.invalid_json_zip') );
             }
         }
         else
         {
-            throw new ZipCodeException("Invalid Format to Type string");
+            throw new ZipCodeException( trans('artesaos-zipcode::zipcode.invalid_format_type_string') );
         }
     }
 
