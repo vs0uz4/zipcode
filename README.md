@@ -4,6 +4,9 @@ __Web Service provided by http://viacep.com.br/__
 
 [![Canducci Cep](https://fulviocanducci.files.wordpress.com/2015/01/1948132_691123557596602_6995479600312612395_n.png)](https://packagist.org/packages/canducci/cep)
 
+
+[![Demo](http://canducci-canducci.c9.io/zipcode)]
+
 ## Quick start
 
 ### Required setup
