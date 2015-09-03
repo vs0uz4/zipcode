@@ -7,7 +7,7 @@ __Web Service provided by http://viacep.com.br/__
 
 ### Demo
 
-[Demo Artesãos ZipCode](http://canducci-canducci.c9.io/zipcode)
+[Demo Artesãos ZipCode](http://zipcodeartesao.herokuapp.com/)
 
 ## Quick start
 
